@@ -1,0 +1,2 @@
+COMPOSER USE:
+Use it: php composer.phar
