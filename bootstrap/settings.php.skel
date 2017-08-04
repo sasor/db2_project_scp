@@ -1,0 +1,17 @@
+<?php
+
+return array(
+
+   'settings' => array(
+      'displayErrorDetails' => true,
+
+      'db' => array(
+	 'driver' => '',
+	 'host' => 'localhost',
+	 'database' => '',
+	 'username' => '',
+	 'password' => '',
+      )
+   )
+
+);

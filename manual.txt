@@ -1,2 +1,5 @@
 COMPOSER USE:
 Use it: php composer.phar
+
+COMPOSER UPDATE CHANGES
+php composer.phar dump-autoload -o
