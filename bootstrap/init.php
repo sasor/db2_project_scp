@@ -17,12 +17,12 @@ $container['db'] = function () use ($container) {
 	$user = $credentials['username'];
 	$password = $credentials['password'];
 
-	$db = new PDO(
+	$db = new \PDO(
 						"{$driver}:dbname={$database};host={$host}",
 						"{$user}",
 						"{$password}"
 					);
-	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
 	return $db;
 };
