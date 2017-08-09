@@ -1,3 +1,5 @@
+**/.vimrc
 /vendor
-/database
-boostrap/settings.php
+#/database
+/bootstrap/settings.php
+example
