@@ -267,6 +267,7 @@ CREATE TABLE examen
    tipo_examen_id integer NOT NULL CHECK (tipo_examen_id > 0),
    hora time,
    fecha date,
+   resultado_disponible boolean NOT NULL DEFAULT FALSE,
    -- orden_examen_id integer NOT NULL CHECK (orden_examen_id > 0),
    CONSTRAINT pk_examen PRIMARY KEY (id),
    CONSTRAINT fk_examen_diagnostico FOREIGN KEY (diagnostico_id) REFERENCES

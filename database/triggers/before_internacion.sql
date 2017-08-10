@@ -5,7 +5,7 @@ $BODY$
 DECLARE
    is_done BOOLEAN;
 BEGIN
-   is_done := fix_dependencias_cama('cama', 'id', OLD.cama_id);
+   is_done := fix_dependencia_cama('cama', 'id', OLD.cama_id);
    RETURN OLD;
 END;
 $BODY$

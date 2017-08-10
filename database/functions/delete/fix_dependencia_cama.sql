@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION fix_dependencias_cama(_tbl TEXT, _col TEXT, _cod INTEGER)
+CREATE OR REPLACE FUNCTION fix_dependencia_cama(_tbl TEXT, _col TEXT, _cod INTEGER)
 RETURNS BOOLEAN
 AS
 $BODY$
