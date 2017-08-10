@@ -114,3 +114,25 @@ AS
    enfermero_apellido_paterno text,
    enfermero_apellido_materno text
 );
+
+CREATE TYPE json_examen
+AS
+(
+   examen_id int,
+   laboratorio_id int,
+   examen_hora time,
+   examen_fecha date,
+   tiene_resultado text,
+   diagnostico_id int,
+   diagnostico_descripcion text,
+   tipo_examen_id int,
+   tipo_examen_nombre text,
+   medico_ci int,
+   medico_nombre text,
+   medico_apellido_paterno text,
+   medico_apellido_materno text,
+   paciente_ci int,
+   paciente_nombre text,
+   paciente_apellido_paterno text,
+   paciente_apellido_materno text
+);

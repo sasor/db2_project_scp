@@ -278,6 +278,14 @@ laboratorio(id) ON UPDATE CASCADE ON DELETE CASCADE,
 tipo_examen(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+CREATE TABLE bitacora_examen
+(
+   id serial,
+   accion varchar(20),
+   fecha timestamp,
+   fields json
+);
+
 CREATE TABLE resultado_examen
 (
    id serial,
