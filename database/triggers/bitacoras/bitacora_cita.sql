@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION bit_cita()
+CREATE OR REPLACE FUNCTION bitacora_laboratorio()
 RETURNS TRIGGER
 AS
 $BODY$
@@ -124,8 +124,8 @@ END;
 $BODY$
 LANGUAGE plpgsql;
 
-CREATE TRIGGER bit_cita
+CREATE TRIGGER bitacora_cita
 AFTER INSERT OR UPDATE OR DELETE
-ON cita
+ON laboratorio
 FOR EACH ROW 
-EXECUTE PROCEDURE bit_cita();
+EXECUTE PROCEDURE bitacora_cita();

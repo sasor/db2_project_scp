@@ -1,6 +1,23 @@
 <?php
 
-$app->get('/', '\App\Controllers\HomeController:home')->setName('home');
+$app->get('/', '\App\Frontend\Controllers\Home:home')->setName('home');
+$app->group('/paciente', function () use ($app) {
+	$app->get('', '\App\Frontend\Controllers\Paciente:index');
+	$app->get('/{id:\d+}', '\App\Frontend\Controllers\Paciente:read');
+	$app->get('/create', '\App\Frontend\Controllers\Paciente:create');
+	$app->get('/update', '\App\Frontend\Controllers\Paciente:update');
+	$app->get('/delete', '\App\Frontend\Controllers\Paciente:destroy');
+});
+$app->group('/medico', function () use ($app) {
+
+});
+$app->group('/enfermero', function () use ($app) {
+
+});
+$app->group('/laboratorista', function () use ($app) {
+
+});
+
 $app->group('/api', function () use ($app) {
 	$app->group('/paciente', function () use ($app) {
 		$app->get('', '\App\Controllers\PacienteController:all');
@@ -24,11 +41,18 @@ $app->group('/api', function () use ($app) {
 		$app->delete('/{id:\d+}', '\App\Controllers\EnfermeroController:destroy');
 	});
 	$app->group('/laboratorista', function () use ($app) {
-		$app->get('', '\App\Controllers\EnfermeroController:all');
-		$app->post('', '\App\Controllers\EnfermeroController:create');
-		$app->get('/{id:\d+}', '\App\Controllers\EnfermeroController:read');
-		$app->put('/{id:\d+}', '\App\Controllers\EnfermeroController:update');
-		$app->delete('/{id:\d+}', '\App\Controllers\EnfermeroController:destroy');
+		$app->get('', '\App\Controllers\LaboratoristaController:all');
+		$app->post('', '\App\Controllers\LaboratoristaController:create');
+		$app->get('/{id:\d+}', '\App\Controllers\LaboratoristaController:read');
+		$app->put('/{id:\d+}', '\App\Controllers\LaboratoristaController:update');
+		$app->delete('/{id:\d+}', '\App\Controllers\LaboratoristaController:destroy');
+	});
+	$app->group('/cita', function () use ($app) {
+		$app->get('', '\App\Controllers\CitaController:all');
+		$app->post('', '\App\Controllers\CitaController:create');
+		$app->get('/{id:\d+}', '\App\Controllers\CitaController:read');
+		$app->put('/{id:\d+}', '\App\Controllers\CitaController:update');
+		$app->delete('/{id:\d+}', '\App\Controllers\CitaController:destroy');
 	});
 });
 

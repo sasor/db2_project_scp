@@ -8,6 +8,19 @@ $app = new \Slim\App($configuration);
 
 $container = $app->getContainer();
 
+$container['view'] = function () use ($container) {
+	$view = new \Slim\Views\Twig(
+		__DIR__ . '/../app/Frontend/views',
+		array('cache' => false, 'debug' => true)
+	); 
+	$view->addExtension(
+		new \Slim\Views\TwigExtension(
+			$container->router, $container->request->getUri()
+		)
+	);
+	return $view;
+};
+
 $container['db'] = function () use ($container) {
 
 	$credentials = $container->get('settings')['db'];

@@ -6,7 +6,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \App\Controllers\Controller;
 
-class MedicoController extends Controller
+class CitaController extends Controller
 {
    public function create(Request $req, Response $res, $args = [])
    {
@@ -14,28 +14,20 @@ class MedicoController extends Controller
       //return $res->withJson($data);
 		$out = null;
 		$data = $req->getParsedBody();
-		$ci = filter_var($data['ci'], FILTER_SANITIZE_NUMBER_INT);
-		$sexo = filter_var($data['sexo'], FILTER_SANITIZE_STRING);
-		$nombre = filter_var($data['nombre'], FILTER_SANITIZE_STRING);
-		$ap = filter_var($data['ap'], FILTER_SANITIZE_STRING);
-		$am = filter_var($data['am'], FILTER_SANITIZE_STRING);
-		$tel = filter_var($data['telefono'], FILTER_SANITIZE_NUMBER_INT);
-		$spe = filter_var($data['especialidad'], FILTER_SANITIZE_STRING);
-		$dir = filter_var($data['direccion'], FILTER_SANITIZE_STRING);
-		$sql = 'SELECT insertar_medico(?,?,?,?,?,?,?,?)';
+		$pid = filter_var($data['pid'], FILTER_SANITIZE_NUMBER_INT);
+		$mid = filter_var($data['mid'], FILTER_SANITIZE_NUMBER_INT);
+		$hora = $data['hora'];
+		$fecha = $data['fecha'];
+		$sql = 'SELECT insertar_cita(?,?,?,?)';
 		try {
 			$stmt = $this->db->prepare($sql);
-			$stmt->bindParam(1, $ci, \PDO::PARAM_INT);
-			$stmt->bindParam(2, $sexo, \PDO::PARAM_BOOL);
-			$stmt->bindParam(3, $nombre, \PDO::PARAM_STR);
-			$stmt->bindParam(4, $ap, \PDO::PARAM_STR);
-			$stmt->bindParam(5, $am, \PDO::PARAM_STR);
-			$stmt->bindParam(6, $tel, \PDO::PARAM_INT);
-			$stmt->bindParam(7, $spe, \PDO::PARAM_STR);
-			$stmt->bindParam(8, $dir, \PDO::PARAM_STR);
+			$stmt->bindParam(1, $pid, \PDO::PARAM_INT);
+			$stmt->bindParam(2, $mid, \PDO::PARAM_INT);
+			$stmt->bindParam(3, $hora);
+			$stmt->bindParam(4, $fecha);
 			$stmt->execute();
 			//$stmt->setFetchMode(\PDO::FETCH_ASSOC);
-			$out = array('status' => '1', 'medico' => $stmt->fetchColumn());
+			$out = array('status' => '1', 'cita' => $stmt->fetchColumn());
 			return $res->withJson($out);
 		} catch (\PDOException $e) {
 			$out = array('status' => '0', 'error' => $stmt->errorInfo());

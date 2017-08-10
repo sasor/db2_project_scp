@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Frontend\Controllers;
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use \App\Controllers\Controller;
+use \App\Frontend\Controllers\Controller;
 
-class HomeController extends Controller
+class Home extends Controller
 {
 	public function home(Request $req, Response $res, $args)
 	{
-		$data = array('message' => 'Good Luck!!');
-		return $res->withJson($data);
+		return $this->view->render($res, 'index.twig');
 	}
 }
 

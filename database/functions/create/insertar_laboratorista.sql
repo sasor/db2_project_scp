@@ -18,12 +18,12 @@ BEGIN
    IF NOT existe THEN
       INSERT INTO laboratorista
       (ci,sexo,nombre,apellido_paterno,apellido_materno,telefono,direccion)
-      VALUES (_ci,_sexo,_nombre,_ap,_am,_tel,_dir) RETURNING ci INTO last_ci;
+      VALUES (_ci,_sexo,_nombre,_ap,_am,_tel,_dir) RETURNING ci INTO last_id;
    ELSE
       RAISE EXCEPTION 'laboratorista ya existe';
    END IF;
 
-   RETURN last_ci;
+   RETURN last_id;
 END
 $BODY$ 
 LANGUAGE plpgsql;

@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="es">
+<head>
+{% include 'layout/head.twig' %}
+</head>
+<body>
+{% include 'layout/header.twig' %}
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+{% include 'layout/footer.twig' %}
+{% include 'layout/scripts.twig' %}
+</body>
+</html>

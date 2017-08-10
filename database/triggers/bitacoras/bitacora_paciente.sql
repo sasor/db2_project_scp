@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION bit_paciente()
+CREATE OR REPLACE FUNCTION bitacora_paciente()
 RETURNS TRIGGER
 AS
 $BODY$
@@ -118,8 +118,8 @@ END;
 $BODY$
 LANGUAGE plpgsql;
 
-CREATE TRIGGER bit_paciente
+CREATE TRIGGER bitacora_paciente
 AFTER INSERT OR UPDATE OR DELETE
 ON paciente
 FOR EACH ROW 
-EXECUTE PROCEDURE bit_paciente();
+EXECUTE PROCEDURE bitacora_paciente();
