@@ -12,14 +12,6 @@ CREATE TABLE paciente
    CONSTRAINT pk_paciente PRIMARY KEY (ci)
 );
 
-CREATE TABLE bitacora_paciente
-(
-   id serial,
-   accion varchar(20),
-   fecha timestamp,
-   fields json
-);
-
 CREATE TABLE medico
 (
    ci integer,
@@ -31,14 +23,6 @@ CREATE TABLE medico
    especialidad varchar(50),
    direccion varchar(150),
    CONSTRAINT pk_medico PRIMARY KEY (ci)
-);
-
-CREATE TABLE bitacora_medico
-(
-   id serial,
-   accion varchar(20),
-   fecha timestamp,
-   fields json
 );
 
 CREATE TABLE enfermero
@@ -53,42 +37,11 @@ CREATE TABLE enfermero
    CONSTRAINT pk_enfermero PRIMARY KEY (ci)
 );
 
-CREATE TABLE bitacora_enfermero
-(
-   id serial,
-   accion varchar(20),
-   fecha timestamp,
-   fields json
-);
-
-CREATE TABLE laboratorista
-(
-   ci integer,
-   laboratorio_id integer NOT NULL CHECK (laboratorio_id > 0),
-   sexo boolean,
-   nombre varchar(50),
-   apellido_paterno varchar(50),
-   apellido_materno varchar(50),
-   telefono integer,
-   direccion varchar(150),
-   CONSTRAINT pk_laboratorista PRIMARY KEY (ci),
-   CONSTRAINT fk_laboratorista FOREIGN KEY (laboratorio_id) REFERENCES
-laboratorio(id) ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-CREATE TABLE bitacora_laboratorista
-(
-   id serial,
-   accion varchar(20),
-   fecha timestamp,
-   fields json
-);
-
 CREATE TABLE cama
 (
    id serial,
    -- numero smallint NOT NULL CHECK (numero > 0),
-   disponible boolean NOT NULL,
+   disponible boolean NOT NULL DEFAULT FALSE,
    CONSTRAINT pk_cama PRIMARY KEY (id)
 );
 
@@ -97,14 +50,6 @@ CREATE TABLE medicamento
    id serial,
    nombre varchar(50) NOT NULL,
    CONSTRAINT pk_medicamento PRIMARY KEY (id)
-);
-
-CREATE TABLE bitacora_medicamento
-(
-   id serial,
-   accion varchar(20),
-   fecha timestamp,
-   fields json
 );
 
 CREATE TABLE cita
@@ -119,14 +64,6 @@ CREATE TABLE cita
 ON UPDATE CASCADE ON DELETE CASCADE,
    CONSTRAINT fk_cita_medico FOREIGN KEY (medico_id) REFERENCES medico(ci) ON
 UPDATE CASCADE ON DELETE CASCADE
-);
-
-CREATE TABLE bitacora_cita
-(
-   id serial,
-   accion varchar(20),
-   fecha timestamp,
-   fields json
 );
 
 CREATE TABLE diagnostico
@@ -155,14 +92,6 @@ diagnostico(id) ON UPDATE CASCADE ON DELETE CASCADE,
 medicamento(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE bitacora_receta_medica
-(
-   id serial,
-   accion varchar(20),
-   fecha timestamp,
-   fields json
-);
-
 CREATE TABLE internacion
 (
    id serial,
@@ -175,7 +104,7 @@ CREATE TABLE internacion
 diagnostico(id) ON UPDATE CASCADE ON DELETE CASCADE,
    CONSTRAINT fk_internacion_cama FOREIGN KEY (cama_id) REFERENCES cama(id) ON
 UPDATE CASCADE ON DELETE CASCADE
-); 
+);
 
 CREATE TABLE paciente_internado
 (
@@ -192,23 +121,6 @@ REFERENCES paciente(ci) ON UPDATE CASCADE ON DELETE CASCADE,
 REFERENCES internacion(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE bitacora_paciente_internado
-(
-   id serial,
-   accion varchar(20),
-   fecha timestamp,
-   fields json
-);
-
-/*CREATE TABLE orden_examen
-(
-   id serial,
-   diagnostico_id integer NOT NULL CHECK (diagnostico_id > 0),
-   CONSTRAINT pk_orden_examen PRIMARY KEY (id),
-   CONSTRAINT fk_orden_examen_diagnostico FOREIGN KEY (diagnostico_id) REFERENCES
-diagnostico(id)
-);*/
-
 CREATE TABLE alta_medica
 (
    id serial,
@@ -224,33 +136,24 @@ diagnostico(id) ON UPDATE CASCADE ON DELETE CASCADE
 CREATE TABLE laboratorio
 (
    id serial,
-   -- laboratorista_id integer NOT NULL CHECK (laboratorista_id > 0),
    telefono integer NOT NULL,
    CONSTRAINT pk_laboratorio PRIMARY KEY (id)
-   -- CONSTRAINT fk_laboratorio_laboratorista FOREIGN KEY (laboratorista_id)
-   -- REFERENCES laboratorista(ci) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE bitacora_laboratorio
+CREATE TABLE laboratorista
 (
-   id serial,
-   accion varchar(20),
-   fecha timestamp,
-   fields json
+   ci integer,
+   laboratorio_id integer NOT NULL CHECK (laboratorio_id > 0),
+   sexo boolean,
+   nombre varchar(50),
+   apellido_paterno varchar(50),
+   apellido_materno varchar(50),
+   telefono integer,
+   direccion varchar(150),
+   CONSTRAINT pk_laboratorista PRIMARY KEY (ci),
+   CONSTRAINT fk_laboratorista FOREIGN KEY (laboratorio_id) REFERENCES
+laboratorio(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
-
-/*CREATE TABLE receta_medicamento
-(
-   id serial,
-   medicamento_id integer NOT NULL CHECK (medicamento_id > 0),
-   receta_id integer NOT NULL CHECK (receta_id > 0),
-   cantidad varchar(50) NOT NULL,
-   CONSTRAINT pk_receta_medicamento PRIMARY KEY (id),
-   CONSTRAINT fk_receta_medicamento_medicamento FOREIGN KEY (medicamento_id)
-REFERENCES medicamento(id),
-   CONSTRAINT fk_receta_medicamento_receta FOREIGN KEY (receta_id) REFERENCES
-receta(id)
-);*/
 
 CREATE TABLE tipo_examen
 (
@@ -268,7 +171,6 @@ CREATE TABLE examen
    hora time,
    fecha date,
    resultado_disponible boolean NOT NULL DEFAULT FALSE,
-   -- orden_examen_id integer NOT NULL CHECK (orden_examen_id > 0),
    CONSTRAINT pk_examen PRIMARY KEY (id),
    CONSTRAINT fk_examen_diagnostico FOREIGN KEY (diagnostico_id) REFERENCES
 diagnostico(id) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -276,14 +178,6 @@ diagnostico(id) ON UPDATE CASCADE ON DELETE CASCADE,
 laboratorio(id) ON UPDATE CASCADE ON DELETE CASCADE,
    CONSTRAINT fk_examen_tipo_examen FOREIGN KEY (tipo_examen_id) REFERENCES
 tipo_examen(id) ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-CREATE TABLE bitacora_examen
-(
-   id serial,
-   accion varchar(20),
-   fecha timestamp,
-   fields json
 );
 
 CREATE TABLE resultado_examen
@@ -295,3 +189,116 @@ CREATE TABLE resultado_examen
    CONSTRAINT fk_resultado_examen_examen FOREIGN KEY (examen_id) REFERENCES
 examen(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
+create table bitacora_paciente
+(
+   id serial,
+   accion varchar(20),
+   fecha timestamp,
+   fields json
+);
+
+CREATE TABLE bitacora_medico
+(
+   id serial,
+   accion varchar(20),
+   fecha timestamp,
+   fields json
+);
+
+CREATE TABLE bitacora_laboratorista
+(
+   id serial,
+   accion varchar(20),
+   fecha timestamp,
+   fields json
+);
+
+CREATE TABLE bitacora_medicamento
+(
+   id serial,
+   accion varchar(20),
+   fecha timestamp,
+   fields json
+);
+
+CREATE TABLE bitacora_cita
+(
+   id serial,
+   accion varchar(20),
+   fecha timestamp,
+   fields json
+);
+
+
+CREATE TABLE bitacora_receta_medica
+(
+   id serial,
+   accion varchar(20),
+   fecha timestamp,
+   fields json
+);
+
+CREATE TABLE bitacora_internacion
+(
+   id serial,
+   accion varchar(20),
+   fecha timestamp,
+   fields json
+);
+
+CREATE TABLE bitacora_examen
+(
+   id serial,
+   accion varchar(20),
+   fecha timestamp,
+   fields json
+);
+
+CREATE TABLE bitacora_resultado_examen
+(
+   id serial,
+   accion varchar(20),
+   fecha timestamp,
+   fields json
+);
+
+CREATE TABLE bitacora_alta_medica
+(
+   id serial,
+   accion varchar(20),
+   fecha timestamp,
+   fields json
+);
+
+CREATE TABLE bitacora_paciente_internado
+(
+   id serial,
+   accion varchar(20),
+   fecha timestamp,
+   fields json
+);
+
+CREATE TABLE bitacora_laboratorio
+(
+   id serial,
+   accion varchar(20),
+   fecha timestamp,
+   fields json
+);
+
+create table bitacora_tipo_examen
+(
+   id serial,
+   accion varchar(20),
+   fecha timestamp,
+   fields json
+);
+
+CREATE TABLE bitacora_enfermero
+(
+   id serial,
+   accion varchar(20),
+   fecha timestamp,
+   fields json
+);
+

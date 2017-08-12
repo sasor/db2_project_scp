@@ -11,7 +11,7 @@ DECLARE
    pac RECORD; -- paciente
    med RECORD; -- medico
 BEGIN
-   IF TG_OP IS 'INSERT' THEN
+   IF TG_OP = 'INSERT' THEN
       SELECT nombre
       FROM tipo_examen
       WHERE id = NEW.tipo_examen_id INTO tipo; -- data tipo_examen

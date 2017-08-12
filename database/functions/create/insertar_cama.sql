@@ -6,7 +6,7 @@ $BODY$
 DECLARE
    last_id INTEGER;
 BEGIN
-   INSERT INTO cama (status) VALUES (_status) RETURNING id INTO last_id;
+   INSERT INTO cama (disponible) VALUES (_status) RETURNING id INTO last_id;
 END;
 $BODY$
 LANGUAGE plpgsql;

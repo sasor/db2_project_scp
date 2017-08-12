@@ -1,8 +1,8 @@
 INSERT INTO cita
-(paciente_id, medico_id)
+(paciente_id, medico_id, hora, fecha)
 VALUES
 --  CITA
-(113320  ,8879224),
+(113320  ,8879224, '19:00:00', '2000-01-01'),
 (113321  ,8879224),
 (113322  ,8879224),
 (113323  ,8879224),

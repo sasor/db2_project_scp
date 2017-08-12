@@ -5,7 +5,7 @@ $BODY$
 DECLARE
    is_done BOOLEAN;
 BEGIN
-   fix_dependencia_examen('examen', 'id', OLD.examen_id);
+   is_done := fix_dependencia_examen('examen', 'id', OLD.examen_id);
    RETURN OLD;
 END;
 $BODY$
@@ -15,4 +15,4 @@ CREATE TRIGGER before_resultado_examen
 BEFORE DELETE
 ON resultado_examen
 FOR EACH ROW
-EXECUTE PROCEDURE  before_resultado_examen();
+EXECUTE PROCEDURE before_resultado_examen();

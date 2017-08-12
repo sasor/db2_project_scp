@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION insertar_receta
+CREATE OR REPLACE FUNCTION insertar_receta_medica
 (_did INTEGER, _mid INTEGER, _dos TEXT, _hora TIME, _fecha DATE)
 RETURNS INTEGER
 AS

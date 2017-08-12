@@ -1,0 +1,18 @@
+CREATE OR REPLACE FUNCTION obtener_camas()
+RETURNS SETOF cama
+AS
+$BODY$
+DECLARE
+   c_p CURSOR FOR SELECT * FROM cama;
+   registro cama%ROWTYPE;
+BEGIN
+   FOR registro IN c_p LOOP
+      RETURN NEXT registro;
+   END LOOP;
+   -- EXCEPTION WHEN NO_DATA_FOUND do somethind
+   IF NOT FOUND THEN
+      RAISE EXCEPTION 'NO_DATA_FOUND';
+   END IF;
+END;
+$BODY$
+LANGUAGE plpgsql;

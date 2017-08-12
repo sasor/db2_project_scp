@@ -106,4 +106,4 @@ CREATE TRIGGER bitacora_enfermero
 AFTER INSERT OR UPDATE OR DELETE
 ON enfermero
 FOR EACH ROW 
-EXECUTE PROCEDURE bitacora_enfermero);
+EXECUTE PROCEDURE bitacora_enfermero();

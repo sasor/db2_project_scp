@@ -27,4 +27,4 @@ CREATE TRIGGER bitacora_medicamento
 AFTER INSERT OR UPDATE OR DELETE
 ON medicamento
 FOR EACH ROW
-EXECUTE PROCEDURE bitacora_medicamento);
+EXECUTE PROCEDURE bitacora_medicamento();

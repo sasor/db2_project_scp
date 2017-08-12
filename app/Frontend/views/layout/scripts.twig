@@ -1,1 +1,13 @@
-<script>script</script>
+<script>
+$.ajax({
+  method: "GET",
+  url: "/api/paciente",
+}).done(function( data ) {
+   if (!(data.status == 1)) { return false; }
+   //var obj = jQuery.parseJSON(data);
+   var pacientes = data.pacientes;
+   $.each(pacientes, function(i, item) {
+     console.log(item);
+   });
+});
+</script>

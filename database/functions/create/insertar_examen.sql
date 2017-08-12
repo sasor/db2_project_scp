@@ -1,5 +1,5 @@
 CREATE OR REPLACE FUNCTION insertar_examen
-(_did INTEGER, _lid INTEGER, _tid INTEGER)
+(_did INTEGER, _lid INTEGER, _tid INTEGER, _hora TIME, _fecha DATE, _rel BOOLEAN)
 RETURNS INTEGER
 AS
 $BODY$
@@ -22,9 +22,9 @@ BEGIN
       RAISE EXCEPTION 'tipo examen no existe';
    END IF;
 
-   INSERT INTO tipo_examen
-   (diagnostico_id,laboratorio_id,tipo_examen_id)
-   VALUES (_did, _lid, _tid) RETURNING id INTO last_id;
+   INSERT INTO examen
+   (diagnostico_id,laboratorio_id,tipo_examen_id,hora,fecha,resultado_disponible)
+   VALUES (_did, _lid, _tid, _hora, _fecha, _rel) RETURNING id INTO last_id;
 
    RETURN last_id;
 END;
