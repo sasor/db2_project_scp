@@ -6,11 +6,11 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \App\Frontend\Controllers\Controller;
 
-class Paciente extends Controller
+class Medico extends Controller
 {
    public function index(Request $req, Response $res, $args = [])
    {
-      return $this->view->render($res, 'paciente/index.twig');
+      return $this->view->render($res, 'medico/index.twig');
    }
 
    public function create(Request $req, Response $res, $args = [])

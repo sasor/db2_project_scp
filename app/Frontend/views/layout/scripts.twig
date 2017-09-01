@@ -7,7 +7,37 @@ $.ajax({
    //var obj = jQuery.parseJSON(data);
    var pacientes = data.pacientes;
    $.each(pacientes, function(i, item) {
-     console.log(item);
+     //console.log(item);
+      var row = '<tr>';
+      row += '<td>' + i + '</td>';
+      row += '<td>' + item.ci + '</td>';
+      row += '<td>' + item.nombre + '</td>';
+      row += '<td>' + item.apellido_paterno + '</td>';
+      row += '<td>' + item.apellido_materno + '</td>';
+      row += '<td>' + item.tipo_sangre + '</td>';
+      row += '</tr>';
+      $('#all_pacientes').append(row);
+   });
+});
+$.ajax({
+  method: "GET",
+  url: "/api/medico",
+}).done(function( data ) {
+   if (!(data.status == 1)) { return alert(data.error); }
+   console.log(data);return false;
+   //var obj = jQuery.parseJSON(data);
+   var pacientes = data.pacientes;
+   $.each(pacientes, function(i, item) {
+     //console.log(item);
+      var row = '<tr>';
+      row += '<td>' + i + '</td>';
+      row += '<td>' + item.ci + '</td>';
+      row += '<td>' + item.nombre + '</td>';
+      row += '<td>' + item.apellido_paterno + '</td>';
+      row += '<td>' + item.apellido_materno + '</td>';
+      row += '<td>' + item.tipo_sangre + '</td>';
+      row += '</tr>';
+      $('#all_pacientes').append(row);
    });
 });
 </script>

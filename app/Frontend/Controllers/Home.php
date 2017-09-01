@@ -8,10 +8,10 @@ use \App\Frontend\Controllers\Controller;
 
 class Home extends Controller
 {
-	public function home(Request $req, Response $res, $args)
-	{
-		return $this->view->render($res, 'index.twig');
-	}
+   public function home(Request $req, Response $res, $args)
+   {
+      return $this->view->render($res, 'index.twig');
+   }
 }
 
 # vim: syntax=php ts=3 sw=3 sts=3
