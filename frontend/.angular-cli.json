@@ -55,6 +55,8 @@
   },
   "defaults": {
     "styleExt": "sass",
-    "component": {}
-  }
+    "component": {
+    }
+  },
+  "packageManager": "yarn"
 }
